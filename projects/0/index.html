@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="description"
+      content="The mock-up front-end and back-end design for Google Search. This is a course project for Harvard edX CS50's Web Programming with Python and JavaScript." />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="stylesheet" href="./css/google_search/google_search.css" />
+
+    <link rel="stylesheet" href="./css/navigation/navigation.css" />
+
+    <title>
+      Google Search
+    </title>
+  </head>
+
+  <body>
+    <nav>
+      <ul>
+        <li>
+          <a href="./image_search.html">
+            Image Search
+          </a>
+        </li>
+
+        <li>
+          <a href="./advanced_search.html">
+            Advanced Search
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <h1 class="title-header">
+      Google Search
+    </h1>
+
+    <form action="https://google.com/search">
+      <input type="text" id="query" name="q" placeholder="Google Search Query..." required />
+
+      <div class="submit-container">
+        <input type="submit" value="Google Search" />
+
+        <input type="submit" id="lucky_button" value="I'm Feeling Lucky" />
+      </div>
+    </form>
+
+    <script>
+      document.getElementById("lucky_button").addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const query = document.getElementById("query").value;
+
+        const url = `https://www.google.com/search?q=${encodeURIComponent(query)}&btnI=1`;
+
+        window.location.assign(url);
+      });
+    </script>
+  </body>
+
+</html>

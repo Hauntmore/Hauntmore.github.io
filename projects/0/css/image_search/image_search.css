@@ -1,0 +1,15 @@
+.title-header {
+  color: rgb(150, 224, 121);
+}
+
+form input[type=text] {
+  margin-left: -7.5vw;
+}
+
+div.submit-container input[type=submit] {
+  margin-right: 3.5%;
+  margin-left: 3.5%;
+  /* margin: 0 3.5% 0 3.5%; */
+}
+
+/*# sourceMappingURL=image_search.css.map */

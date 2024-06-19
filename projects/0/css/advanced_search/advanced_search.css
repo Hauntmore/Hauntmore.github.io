@@ -1,0 +1,22 @@
+form {
+  margin-left: 300px;
+}
+
+form h3 {
+  color: turquoise;
+}
+
+.title-header {
+  margin-bottom: 10vh;
+  margin-left: 235px;
+  margin-top: 15vh;
+  text-align: left;
+  color: blue;
+}
+
+div.submit-container input[type=submit] {
+  background-color: #344ceb;
+  margin-right: 3.5%;
+  margin-left: 3.5%;
+  color: white;
+}

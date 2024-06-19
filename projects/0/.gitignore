@@ -1,0 +1,5 @@
+# macOS Attributes Binary Files
+*.DS_Store
+
+# Generated Transpiled Source Code Files
+*.map

@@ -5,19 +5,19 @@
     <meta charset="UTF-8" />
 
     <meta name="description"
-      content="The front-end design for Google Image Search. This is a course project for Harvard edX CS50's Web Programming with Python and JavaScript." />
+      content="The mock-up front-end design for Google's Image Search feature. This is a course project for Harvard edX CS50's Web Programming with Python and JavaScript." />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>
-      Google Search
-    </title>
 
     <link rel="stylesheet" href="./css/google_search/google_search.css" />
 
     <link rel="stylesheet" href="./css/navigation/navigation.css" />
 
     <link rel="stylesheet" href="./css/image_search/image_search.css" />
+
+    <title>
+      Google Image Search
+    </title>
   </head>
 
   <body>
@@ -38,20 +38,16 @@
     </nav>
 
     <h1 class="title-header">
-      Google Image Search
+      Image Search
     </h1>
 
     <form action="https://www.google.com/search">
       <input type="hidden" name="tbm" value="isch">
 
-      <input type="text" name="q" placeholder="Google Image Search" required />
-
-      <br>
+      <input type="text" name="q" placeholder="Google Image Search Query..." required />
 
       <div class="submit-container">
-        <input type="submit" value="Search Google Image" />
-
-        <input type="submit" value="I'm Feeling Lucky" />
+        <input type="submit" value="Search Google Images" />
       </div>
     </form>
   </body>

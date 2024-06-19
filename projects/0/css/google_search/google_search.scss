@@ -1,0 +1,59 @@
+@use "../variables";
+
+body {
+  background-color: #1f1c1c;
+}
+
+form {
+  margin: auto;
+  width: 25vw;
+}
+
+label {
+  color: #c9d1cb;
+}
+
+.title-header {
+  font-family: variables.$fonts;
+  text-align: center;
+  margin-top: 40vh;
+  color: #f25252;
+  font-size: 75px;
+}
+
+.submit-container {
+  justify-content: center;
+  align-items: center;
+  margin-top: 2vh;
+  display: flex;
+}
+
+form input[type=text] {
+  border: 2px solid variables.$greyColor;
+  box-sizing: border box;
+  margin-left: -7.25vw;
+  border-radius: 3em;
+  text-align: center;
+  height: 4vh;
+  width: 40vw;
+}
+
+div.submit-container input[type=submit] {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid variables.$greyColor;
+  font-family: "Lucida Console";
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 11px 20px;
+  margin: 0 1% 0 5%;
+  font-size: 14px;
+  cursor: pointer;
+  color: black;
+  left: 100px;
+}
+
+div.submit-container input:hover {
+  background-color: variables.$greyColor;
+  font-family: variables.$fonts;
+  color: white;
+}
