@@ -10,8 +10,8 @@
 
 #### Directory
 
-1. [Google Search](https://hauntmore.github.io/projects/0/index.html)
-2. [Image Search](https://hauntmore.github.io/projects/0/image_search.html)
-3. [Advanced Search](https://hauntmore.github.io/projects/0/advanced_search.html)
+1. [Google Search](https://hauntmore.github.io/projects/search/index.html)
+2. [Image Search](https://hauntmore.github.io/projects/search/image_search.html)
+3. [Advanced Search](https://hauntmore.github.io/projects/search/advanced_search.html)
 
 ------------------------------------------------------------------
