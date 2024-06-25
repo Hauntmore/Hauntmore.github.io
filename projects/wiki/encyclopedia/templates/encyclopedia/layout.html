@@ -24,10 +24,14 @@
           Wikipedia
         </h2>
 
+        <br>
+
         <form action="{% url 'encyclopedia:search' %}">
           {% csrf_token %}
-          <input class="search" type="text" name="search_query" placeholder="Search Encyclopedia">
+          <input class="search" type="text" name="search_query" placeholder="Search Encyclopedia" required>
         </form>
+
+        <br>
 
         <div>
           <a href="{% url 'encyclopedia:index' %}">
@@ -37,7 +41,7 @@
 
         <div>
           <a href="{% url 'encyclopedia:create' %}">
-            Create A New Page
+            New Page
           </a>
         </div>
 

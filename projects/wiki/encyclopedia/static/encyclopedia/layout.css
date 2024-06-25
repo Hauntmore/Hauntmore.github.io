@@ -1,14 +1,11 @@
 body {
   margin: 0;
-  background-color: white;
-}
-
-code {
-  white-space: pre;
+  background-color: #b1dcf0;
+  font-style: "Monospace", "Fantasy", "Ariel";
 }
 
 h1 {
-  margin-top: 0; /* 0px */
+  margin-top: 0;
   padding-top: 20px;
 }
 
@@ -24,17 +21,22 @@ a {
 
 a:hover {
   text-decoration: underline;
-  color: black;
 }
 
-li {
-  list-style: none;
+li:hover {
+  text-decoration: underline;
 }
 
 div[class="alert alert-danger"] {
   text-align: center;
 }
 
+form input[type=text] {
+  border: 2px solid #6b6965;
+  box-sizing: border box;
+  border-radius: 3em;
+  text-align: center;
+}
 
 .main {
   padding: 10px;
@@ -48,7 +50,7 @@ div[class="alert alert-danger"] {
 
 .sidebar {
   box-sizing: border-box exists;
-  background-color: #f0f0f0;
+  background-color: #e6e2e2;
   height: 100vh;
   padding: 20px;
 }
