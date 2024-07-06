@@ -1,0 +1,42 @@
+textarea {
+    min-height: 400px;
+}
+
+.read {
+    background-color: darkgray;
+    cursor: pointer;
+}
+
+.unread {
+    background-color: whitesmoke;
+    cursor: pointer;
+}
+
+.email-sender {
+    font-weight: bold;
+}
+
+.email-timestamp {
+    text-align: right;
+}
+
+.row-container {
+  justify-content: center;
+  align-items: center;
+  margin-top: 2vh;
+  display: flex;
+}
+
+.row-container button {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #6b6965;
+  font-family: "Lucida Console", "Sans-serif", "Ariel";
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 11px 20px;
+  margin: 0 1% 0 5%;
+  font-size: 14px;
+  cursor: pointer;
+  color: black;
+  left: 100px;
+}

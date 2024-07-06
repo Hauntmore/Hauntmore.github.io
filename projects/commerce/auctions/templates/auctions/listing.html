@@ -1,0 +1,292 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+
+{{ listing.id }} - Listing
+
+{% endblock %}
+
+{% block body %}
+
+{% if message %}
+
+<b>
+  {{ message }}
+</b>
+
+{% endif %}
+
+{% if user.is_authenticated and listing.user != request.user %}
+
+{% if listing.active %}
+<form
+  action="{% if on_watchlist %}{% url 'auctions:unwatch' auction_id=listing.id %}{% else %}{% url 'auctions:watch' auction_id=listing.id %}{% endif %}"
+  method="post">
+  {% csrf_token %}
+
+  <input type="submit" class="btn btn-primary"
+    value="{% if on_watchlist %}Remove from Watchlist{% else %}Add to Watchlist{% endif %}" />
+</form>
+{% endif %}
+
+{% endif %}
+
+<h1 class="listing-single">
+  View Listing
+</h1>
+
+<hr>
+
+{% if listing.winner is not None %}
+
+{% if request.user == bid.user %}
+
+<h2 class="display-2 pb-5 text-success">
+  Highest bid, you are the winner!
+</h2>
+
+{% endif %}
+
+{% endif %}
+
+<div class="listing-single">
+
+  {% if listing.image_url %}
+
+  <div class="card-image-wrapper">
+    <img class="card-img-top listing-img" src="{{ listing.image_url }}" height=200 alt="{{ listing.title }} photo">
+  </div>
+
+  {% endif %}
+
+  <br>
+
+  <br>
+
+  <h5 class="card-title">
+    {{ listing.title }} by
+    <i>
+      {{ listing.user }}
+    </i>
+
+    -
+
+    <i>
+      {{ listing.user.email }}
+    </i>
+  </h5>
+
+  <br>
+
+  {% if listing.winner is None %}
+
+  <p>
+    <b>
+      Status:
+    </b>
+
+    <span class="text-success lead">
+      <strong>
+        Available
+      </strong>
+    </span>
+  </p>
+
+  {% else %}
+
+  <p>
+    <b>
+      Status:
+    </b>
+
+    <span class="text-danger lead">
+      <strong>
+        Sold
+      </strong>
+    </span>
+  </p>
+
+  {% endif %}
+
+  {% if request.user == bid.user %}
+
+  {% if listing.winner is not None %}
+
+  <h5 class="text-muted pt-3">
+    {{ listing.bid_counter }} bids in total.
+
+    <span class="lead">
+      Congratulations, {{ bid.user }}! 🎊
+    </span>
+  </h5>
+
+  {% else %}
+
+  <h5 class="text-muted pt-3">
+    {{ listing.bid_counter }} bids so far.
+
+    <span class="lead">
+      Your bid is the current highest bid.
+    </span>
+  </h5>
+
+  {% endif %}
+
+  {% else %}
+  <h5 class="text-muted pt-3">
+    {{ listing.bid_counter }} bids so far.
+  </h5>
+
+  {% endif %}
+
+  <br>
+
+  <div class="mb-2">
+    <strong>
+      Description:
+    </strong>
+
+    {{ listing.description }}
+  </div>
+
+  <br>
+
+  <div class="mb-2">
+    <strong>
+      Price (Starting Bid):
+    </strong>
+
+    {% load format_starting_bid %}
+
+    ${{ listing.starting_bid|format_starting_bid }}
+  </div>
+
+  <br>
+
+  <div class="mb-2">
+    <strong>
+      Category:
+    </strong>
+
+    {{ listing.category }}
+  </div>
+
+  <br>
+
+  <div class="auction-list-date">
+    {{ listing.posted_at }}
+  </div>
+</div>
+
+<div class="col-md-5 pl-4 mx-left-auto">
+  {% if not listing.user == request.user %}
+
+  <form action="{% url 'auctions:update_bid' bid.id %}" method="post">
+    {% csrf_token %}
+
+    <div class="input-group mb-3">
+      {% if listing.winner is not None %}
+
+      {% if bid.user == request.user %}
+
+      <div class="input-group-prepend">
+        <button disabled class="btn bg-success disabled text-light" type="submit">
+          Winner
+        </button>
+      </div>
+
+      <input disabled type="number" min="{{ bid.amount }}" step="0.01" max="99999999999.99" class="form-control"
+        name="bid" placeholder="Your won with a bid of ${{ bid.amount }}">
+
+      {% else %}
+
+      <div class="input-group-prepend">
+        <button disabled class="btn bg-danger disabled text-light" type="submit">
+          Sold
+        </button>
+      </div>
+
+      <input disabled type="number" min="{{ bid.amount }}" step="0.01" max="99999999999.99" class="form-control"
+        name="bid" placeholder="Highest bid: ${{ bid.amount }}">
+
+      {% endif %}
+
+      {% else %}
+
+      <div class="input-group-prepend">
+        <button class="btn btn-outline-secondary bg-info text-light" type="submit">
+          Bid Now!
+        </button>
+
+      </div>
+
+      <input required type="number" min="{{ bid.amount }}" step="0.01" max="99999999999.99" class="form-control"
+        name="bid" placeholder="Current Bid: ${{ bid.amount }}">
+
+      {% endif %}
+
+    </div>
+  </form>
+
+  {% else %}
+
+  <form action="{% url 'auctions:close_bid' bid.id %}" method="post">
+    {% csrf_token %}
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <button class="btn btn-outline-secondary bg-danger text-light" type="submit">
+          Close Bid
+        </button>
+      </div>
+
+      <input disabled type="text" class="form-control" placeholder="Last bid: {{ bid.user }} (${{ bid.amount }})">
+    </div>
+  </form>
+
+  {% endif %}
+
+  <h5 class="text-muted pt-3">Comments:</h5>
+  <form action="{% url 'auctions:comments' listing.id %}" class="form-group" method="post">
+    {% csrf_token %}
+
+    {{ comment_form }}
+
+    <input class="btn btn-lg btn-outline-secondary" type="submit" value="Add comment">
+  </form>
+
+  <hr>
+
+</div>
+
+{% for comment in comments %}
+
+<div class="card mb-3">
+  <div class="card-header">
+    <p class="h5 text-muted">
+      {{ comment.user }} -
+
+      <span class="text-muted lead">
+        {{ comment.created_at }}
+      </span>
+    </p>
+  </div>
+
+  <div class="card-body">
+    <p class="card-text lead">
+      {{ comment.text }}
+    </p>
+  </div>
+</div>
+
+{% empty %}
+
+<p class="display-4 pb-5 ml-3">
+  No comments for this auction yet.
+</p>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

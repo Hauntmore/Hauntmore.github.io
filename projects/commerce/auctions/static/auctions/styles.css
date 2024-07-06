@@ -1,0 +1,83 @@
+body {
+    padding: 10px;
+    font-family: "Copperplate", "Times New Roman", "Sans-serif";
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control::placeholder {
+    color: #999;
+}
+
+.form-label {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.form-btn {
+    background-color: orange;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.form-btn:hover {
+    background-color: #eb6506;
+}
+
+.auction-item {
+    padding: 0;
+    margin-right: 20px;
+    width: 500px;
+}
+
+.auction-item a {
+    color: black;
+}
+
+.auction-item a:hover {
+    color: var(--first-blue-light);
+    text-decoration: none;
+}
+
+.card-image-wrapper {
+    background-color: var(--white-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 100%;
+}
+
+.listing-img {
+    padding-top: 20px;
+    object-fit: contain;
+}
+
+.auction-list-date {
+    font-size: small;
+    font-style: italic;
+    color: grey;
+}
+
+.listing-single {
+    text-align: center;
+}

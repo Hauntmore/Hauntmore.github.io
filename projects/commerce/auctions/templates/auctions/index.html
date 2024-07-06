@@ -1,0 +1,63 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+{% for listing in listings %}
+<div class="card auction-item mb-4 shadow">
+  <a href="{% url 'auctions:listing' listing.id %}">
+    {% if listing.image_url %}
+
+    <div class="card-image-wrapper">
+      <img class="card-img-top listing-img" src="{{ listing.image_url }}" height=200 alt="{{ listing.title }} photo">
+    </div>
+
+    {% endif %}
+
+    <div class="card-body">
+      <h5 class="card-title">
+        {{ listing.title }}
+      </h5>
+
+      <div class="mb-2">
+        <strong>
+          Description:
+        </strong>
+
+        {{ listing.description }}
+      </div>
+
+      <div class="mb-2">
+        <strong>
+          Price:
+        </strong>
+
+        {% load format_starting_bid %}
+
+        ${{ listing.starting_bid|format_starting_bid }}
+      </div>
+
+      <div class="mb-2">
+        <strong>
+          Category:
+        </strong>
+
+        {{ listing.category }}
+      </div>
+
+      <div class="auction-list-date">
+        {{ listing.posted_at }}
+      </div>
+    </div>
+  </a>
+</div>
+
+{% empty %}
+
+<div>
+  <b>
+    No auctions yet.
+  </b>
+</div>
+{% endfor %}
+
+{% endblock %}
