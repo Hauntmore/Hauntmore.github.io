@@ -1,0 +1,77 @@
+body {
+  font-family: "Times New Roman", "Georgia", "Sans-serif";
+}
+
+textarea {
+  max-height: 200px;
+}
+
+.box {
+  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: #f0f0f0;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.form-control {
+  min-height: 100px;
+  min-width: 400px;
+  max-height: 200px;
+  max-width: 600px;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+
+.form-control::placeholder {
+  color: #999;
+}
+
+.form-container label {
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.form-submit:hover {
+  background-color: lightgreen;
+  border-color: transparent;
+}
+
+.all-posts {
+  box-sizing: border-box;
+  margin-right: 20px;
+  padding-top: 1%;
+  padding-left: 1%;
+  width: 500px;
+}
+
+.all-posts a {
+  color: black;
+}
+
+.all-posts a:hover {
+  color: var(--first-blue-light);
+  text-decoration: none;
+}
+
+.timestamp {
+  font-family: "Lucida Console", "Arial", "Serif";
+  font-size: small;
+  font-style: italic;
+  color: grey;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.follow-buttons {
+  margin-left: 15px;
+}

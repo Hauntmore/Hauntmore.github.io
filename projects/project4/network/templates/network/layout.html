@@ -1,85 +1,93 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 
-    <head>
-        <title>
-            {% block title %}
-            Social Network
-            {% endblock %}
-        </title>
+  <head>
+    <meta charset="UTF-8" />
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="description" content="This is the layout that will parent all of this application's pages." />
 
-        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
-    </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <body>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">
-                Network
+    <link rel="stylesheet" href="{% static 'network/styles.css' %}" />
+
+    <script src="{% static 'network/index.js' %}">
+    </script>
+
+    <title>
+      {% block title %}
+      Social Network
+      {% endblock %}
+    </title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'network:index' %}">
+        Network
+      </a>
+
+      <div>
+        <ul class="navbar-nav mr-auto">
+          {% if request.user.is_authenticated %}
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'network:profile' request.user.username %}">
+              <strong>
+                {{ request.user.username }}
+              </strong>
             </a>
+          </li>
 
-            <div>
-                <ul class="navbar-nav mr-auto">
-                    {% if user.is_authenticated %}
+          {% endif %}
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <strong>
-                                {{ user.username }}
-                            </strong>
-                        </a>
-                    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'network:index' %}">
+              Home
+            </a>
+          </li>
 
-                    {% endif %}
+          {% if request.user.is_authenticated %}
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'network:index' %}">
-                            All Posts
-                        </a>
-                    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'network:following' %}">
+              Following
+            </a>
+          </li>
 
-                    {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'network:logout' %}">
+              Log Out
+            </a>
+          </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Following
-                        </a>
-                    </li>
+          {% else %}
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'network:logout' %}">
-                            Log Out
-                        </a>
-                    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'network:login' %}">
+              Login
+            </a>
+          </li>
 
-                    {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'network:register' %}">
+              Register
+            </a>
+          </li>
+        </ul>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'network:login' %}">
-                            Log In
-                        </a>
-                    </li>
+        {% endif %}
+      </div>
+    </nav>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'network:register' %}">
-                            Register
-                        </a>
-                    </li>
-
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
-
-        <div class="body">
-            {% block body %}
-            {% endblock %}
-        </div>
-    </body>
+    <div class="body">
+      {% block body %}
+      {% endblock %}
+    </div>
+  </body>
 
 </html>

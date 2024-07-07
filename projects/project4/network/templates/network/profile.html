@@ -1,28 +1,81 @@
 {% extends "network/layout.html" %}
 
 {% block title %}
-Home
+{{ user.username }} | Network
 {% endblock %}
 
 {% block body %}
+<div class="card">
+  <div class="card-body">
+    <h2>
+      {{ user.username }}
+    </h2>
 
-{% if request.user.is_authenticated %}
+    <p>
+      <strong>
+        Followers:
+      </strong>
+      {{ profile.followers.count }}
+    </p>
 
-<div id="create-post">
-  <div class="form-container box">
-    <form id="post-form" method="post">
-      {{ create_post_form }}
+    <p>
+      <strong>
+        Following:
+      </strong>
+      {{ profile.following.count }}
+    </p>
 
-      <br>
-
-      <input class="form-submit btn btn-primary" value="Post" id="submit-post" type="submit" />
-    </form>
+    <p>
+      <strong>
+        Email:
+      </strong>
+      {{ user.email }}
+    </p>
   </div>
+
+  {% if request.user.is_authenticated and request.user != user %}
+
+  <div class="follow-buttons">
+
+    <button id="follow-unfollow" class="btn btn-secondary" data-username="{{ user.username }}"
+      data-action="{% if is_following %}DELETE{% else %}POST{% endif %}" data-is_following="{{ is_following }}"
+      type="button">
+      {% if is_following %}
+      Unfollow
+      {% else %}
+      Follow
+      {% endif %}
+    </button>
+
+    <!-- {% if is_following %}
+
+    <button class="btn btn-secondary" data-username="{{ user.username }}" data-action="DELETE" type="button">
+      Unfollow
+    </button>
+
+    {% else %}
+
+    <button class="btn btn-secondary" title="Follow" data-username="{{ user.username }}" data-action="POST"
+      type="button">
+      Follow
+    </button>
+
+    {% endif %} !-->
+
+  </div>
+
+  {% endif %}
+
+  <br>
 </div>
 
-{% endif %}
-
 <div class="all-posts">
+  <h2>
+    {{ user.username }}'s Posts
+  </h2>
+
+  <br>
+
   {% for post in posts %}
 
   <div class="card all-posts mb-4 shadow">
@@ -30,7 +83,7 @@ Home
       <h5 class="card-title">
         <strong>
           <a href="{% url 'network:profile' post.user %}">
-            [{{ post.id }}] {{ post.user }}
+            {{ post.user }}
           </a>
         </strong>
       </h5>
@@ -75,22 +128,19 @@ Home
         Save
       </button>
     </div>
-
-    <br>
   </div>
-</div>
 
-<br>
+  <br>
 
-{% empty %}
+  {% empty %}
 
-<p>
-  <strong>
-    No posts have been made yet.
-  </strong>
-</p>
+  <p>
+    <strong>
+      No posts have been made yet.
+    </strong>
+  </p>
 
-{% endfor %}
+  {% endfor %}
 </div>
 
 <hr>
@@ -119,5 +169,4 @@ Home
 
   </ul>
 </nav>
-
 {% endblock %}

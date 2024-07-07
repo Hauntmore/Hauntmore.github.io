@@ -1,26 +1,10 @@
 {% extends "network/layout.html" %}
 
 {% block title %}
-Home
+Followings
 {% endblock %}
 
 {% block body %}
-
-{% if request.user.is_authenticated %}
-
-<div id="create-post">
-  <div class="form-container box">
-    <form id="post-form" method="post">
-      {{ create_post_form }}
-
-      <br>
-
-      <input class="form-submit btn btn-primary" value="Post" id="submit-post" type="submit" />
-    </form>
-  </div>
-</div>
-
-{% endif %}
 
 <div class="all-posts">
   {% for post in posts %}
@@ -30,7 +14,7 @@ Home
       <h5 class="card-title">
         <strong>
           <a href="{% url 'network:profile' post.user %}">
-            [{{ post.id }}] {{ post.user }}
+            {{ post.user }}
           </a>
         </strong>
       </h5>
@@ -39,58 +23,29 @@ Home
         {{ post.content }}
       </div>
 
-      {% if request.user == post.user %}
-
-      <div class="mb-2">
-        <button class="btn btn-info" id="edit-post" data-post-id="{{ post.id }}" type="button">
-          Edit
-        </button>
-      </div>
-
-      {% endif %}
-
-      {% if request.user.is_authenticated %}
-
       <div class="mb-2">
         <button id="like" data-post-id="{{ post.id }}" type="button">
           &#x2665;&#xfe0f; {{ post.likes.count }}
         </button>
       </div>
 
-      {% endif %}
-
       <div class="timestamp">
         {{ post.posted_at }}
       </div>
     </div>
-
-    <div class="hidden" id="edit-post-form" data-post-id="{{ post.id }}">
-      <textarea id="edit-post-content" placeholder="Please tell us what is on your mind right now." rows="5" cols="75">
-      {{ post.content }}
-      </textarea>
-
-      <br>
-
-      <button class="btn btn-primary" id="save-edit" type="button">
-        Save
-      </button>
-    </div>
-
-    <br>
   </div>
-</div>
 
-<br>
+  <br>
 
-{% empty %}
+  {% empty %}
 
-<p>
-  <strong>
-    No posts have been made yet.
-  </strong>
-</p>
+  <p>
+    <strong>
+      No posts are available.
+    </strong>
+  </p>
 
-{% endfor %}
+  {% endfor %}
 </div>
 
 <hr>
